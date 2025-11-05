@@ -1,0 +1,218 @@
+import React from 'react';
+import './App.css';
+import robotImg from '../assets/ChipChat Landing Page 2 Transparent.png';
+import appleLogo from '../assets/apple_logo_white_transparent.png';
+import levelHomeLogo from '../assets/level_home_logo.png';
+import nvidiaLogo from '../assets/nvidia_logo_green_transparent.png';
+import teslaLogo from '../assets/tesla_logo_red_transparent.png';
+import waterlooLogo from '../assets/waterloo_logo_transparent.png';
+
+const navLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Demo', href: '#demo' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const teamMembers = [
+  {
+    name: 'Matthew Gerges',
+    title: 'Founder & Systems Engineer',
+    bio: "Apple alum focused on system-level bring-up and debugging. After feeling how slow legacy hardware dev tools have become, Matthew started ChipChat to modernize the workflow.",
+    image: 'https://i.pravatar.cc/160?img=32',
+    companies: [
+      { name: 'Apple', logo: appleLogo },
+      { name: 'LevelHome', logo: levelHomeLogo },
+      { name: 'University of Waterloo', logo: waterlooLogo },
+    ],
+  },
+  {
+    name: 'Priya Shah',
+    title: 'Product & UX',
+    bio: 'Former IDE designer who has spent the last 6 years building developer tools. She believes AI copilots can take the mind-numbing setup work off of hardware teams.',
+    image: 'https://i.pravatar.cc/160?img=45',
+    companies: [
+      { name: 'NVIDIA', logo: nvidiaLogo },
+      { name: 'Tesla', logo: teslaLogo },
+      { name: 'University of Waterloo', logo: waterlooLogo },
+    ],
+  },
+  {
+    name: 'Luis Martinez',
+    title: 'Hardware Automation',
+    bio: 'Built test automation rigs for semiconductor labs across three continents. Luis joined ChipChat to make reliable validation pipelines accessible to every team.',
+    image: 'https://i.pravatar.cc/160?img=12',
+    companies: [
+      { name: 'Apple', logo: appleLogo },
+      { name: 'Tesla', logo: teslaLogo },
+      { name: 'University of Waterloo', logo: waterlooLogo },
+    ],
+  },
+];
+
+export default function App() {
+  return (
+    <div className="page">
+      {/* ---------------- NAV & HERO ---------------- */}
+      <section className="hero-card">
+        <header className="nav">
+          <div className="brand">
+            <span className="brand-icon" aria-hidden="true">
+              <span className="dot" />
+              <span className="tail" />
+            </span>
+            <span className="brand-text">ChipChat</span>
+          </div>
+
+          <nav className="nav-links" aria-label="Primary">
+            {navLinks.map((link) => (
+              <a href={link.href} key={link.label} className="nav-link">
+                {link.label}
+              </a>
+            ))}
+          </nav>
+        </header>
+
+        <main className="hero">
+          <section className="hero-copy">
+            <h1>
+              <span className="text-gradient">Vibe Code</span>
+              <br />
+              but with <span className="text-gradient">Hardware</span>
+            </h1>
+
+            <form
+              className="hero-form"
+              onSubmit={(event) => {
+                event.preventDefault();
+              }}
+            >
+              <label htmlFor="email" className="sr-only">
+                Work email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="email@company.com"
+                autoComplete="email"
+              />
+              <button type="submit" className="btn primary">
+                Join Waitlist
+              </button>
+            </form>
+          </section>
+
+          <aside className="hero-visual" aria-hidden="true">
+            <div className="glow" />
+            <img src={robotImg} alt="ChipChat AI assistant robot" loading="lazy" />
+          </aside>
+        </main>
+      </section>
+
+      {/* ---------------- DEMO SECTION ---------------- */}
+      <section id="demo" className="demo-section" aria-labelledby="demo-heading">
+        <div className="demo-copy">
+          <span className="badge subtle">Live Demo</span>
+          <h2 id="demo-heading">See ChipChat in action</h2>
+          <p className="demo-lede">
+            Watch a quick walkthrough of how ChipChat accelerates bring-up workflows with an AI-native toolkit for hardware engineers.
+          </p>
+        </div>
+        <div className="video-frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/oBjroKJ2qTA?start=162&rel=0"
+            title="ChipChat demo video"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
+      </section>
+
+      {/* ---------------- ABOUT SECTION ---------------- */}
+      <section id="about" className="about-section" aria-labelledby="about-heading">
+        <header className="about-header">
+          <span className="badge subtle">Meet the Team</span>
+          <h2 id="about-heading">The People Building ChipChat</h2>
+          <p>
+            ChipChat is crafted by engineers who have wrestled with the same hardware workflows we now
+            automate. We built it for teams that want momentum from day zero.
+          </p>
+        </header>
+
+        <div className="team-grid">
+          {teamMembers.map((member) => (
+            <article key={member.name} className="team-card">
+              <div className="team-card-top">
+                <div className="avatar-frame">
+                  <img src={member.image} alt={`${member.name} headshot`} loading="lazy" />
+                </div>
+                <div className="company-list" aria-label={`${member.name} previous companies`}>
+                  {member.companies.map((company) => (
+                    <span key={company.name} className="company-badge">
+                      <img src={company.logo} alt={`${company.name} logo`} />
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="team-content">
+                <h3>{member.name}</h3>
+                <p className="team-title">{member.title}</p>
+                <p>{member.bio}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ---------------- CONTACT SECTION ---------------- */}
+      <section id="contact" className="contact-section" aria-labelledby="contact-heading">
+        <header className="contact-header">
+          <span className="badge subtle">Contact</span>
+          <h2 id="contact-heading">Tell us what you want to build</h2>
+          <p>
+            Have a question, want to collaborate, or exploring an investment? Drop a note and the
+            ChipChat team will reach out shortly.
+          </p>
+        </header>
+
+        <form
+          className="contact-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+          }}
+        >
+          <div className="contact-row">
+            <label htmlFor="contact-name">Name</label>
+            <input id="contact-name" name="name" type="text" placeholder="Your name" />
+          </div>
+
+          <div className="contact-row">
+            <label htmlFor="contact-email">Email</label>
+            <input
+              id="contact-email"
+              name="email"
+              type="email"
+              placeholder="you@company.com"
+              autoComplete="email"
+            />
+          </div>
+
+          <div className="contact-row">
+            <label htmlFor="contact-message">Message</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="4"
+              placeholder="Let us know how we can help"
+            />
+          </div>
+
+          <button type="submit" className="btn primary">
+            Send message
+          </button>
+        </form>
+      </section>
+    </div>
+  );
+}
