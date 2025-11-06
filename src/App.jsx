@@ -6,6 +6,9 @@ import levelHomeLogo from '../assets/level_home_logo.png';
 import nvidiaLogo from '../assets/nvidia_logo_green_transparent.png';
 import teslaLogo from '../assets/tesla_logo_red_transparent.png';
 import waterlooLogo from '../assets/waterloo_logo_transparent.png';
+import matthewPfp from '../assets/Matthew_G_Pfp.png';
+import andrewPfp from '../assets/Andrew_M_Pfp.jpeg';
+import michaelPfp from '../assets/Michael_B_Pfp.jpeg';
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -18,7 +21,7 @@ const teamMembers = [
     name: 'Matthew Gerges',
     title: 'Founder & Systems Engineer',
     bio: "Apple alum focused on system-level bring-up and debugging. After feeling how slow legacy hardware dev tools have become, Matthew started ChipChat to modernize the workflow.",
-    image: 'https://i.pravatar.cc/160?img=32',
+    image: matthewPfp,
     companies: [
       { name: 'Apple', logo: appleLogo },
       { name: 'LevelHome', logo: levelHomeLogo },
@@ -26,10 +29,10 @@ const teamMembers = [
     ],
   },
   {
-    name: 'Priya Shah',
+    name: 'Andrew Morris',
     title: 'Product & UX',
-    bio: 'Former IDE designer who has spent the last 6 years building developer tools. She believes AI copilots can take the mind-numbing setup work off of hardware teams.',
-    image: 'https://i.pravatar.cc/160?img=45',
+    bio: 'Former IDE designer who has spent the last 6 years building developer tools. He believes AI copilots can take the mind-numbing setup work off of hardware teams.',
+    image: andrewPfp,
     companies: [
       { name: 'NVIDIA', logo: nvidiaLogo },
       { name: 'Tesla', logo: teslaLogo },
@@ -37,10 +40,10 @@ const teamMembers = [
     ],
   },
   {
-    name: 'Luis Martinez',
+    name: 'Michael Browne',
     title: 'Hardware Automation',
-    bio: 'Built test automation rigs for semiconductor labs across three continents. Luis joined ChipChat to make reliable validation pipelines accessible to every team.',
-    image: 'https://i.pravatar.cc/160?img=12',
+    bio: 'Built test automation rigs for semiconductor labs across three continents. Michael joined ChipChat to make reliable validation pipelines accessible to every team.',
+    image: michaelPfp,
     companies: [
       { name: 'Apple', logo: appleLogo },
       { name: 'Tesla', logo: teslaLogo },
@@ -52,8 +55,8 @@ const teamMembers = [
 export default function App() {
   return (
     <div className="page">
-      {/* ---------------- NAV & HERO ---------------- */}
-      <section className="hero-card">
+      {/* ---------------- NAV & HERO SECTION ---------------- */}
+      <section className="new-hero-section">
         <header className="nav">
           <div className="brand">
             <span className="brand-icon" aria-hidden="true">
@@ -71,45 +74,33 @@ export default function App() {
             ))}
           </nav>
         </header>
-
-        <main className="hero">
-          <section className="hero-copy">
-            <h1>
-              <span className="text-gradient">Vibe Code</span>
-              <br />
-              but with <span className="text-gradient">Hardware</span>
+        <div className="new-hero-content">
+          <div className="new-hero-left">
+            <h1 className="new-hero-title">
+              <div className="gradient-text">Vibe Code</div>
+              <div className="white-text">but with</div>
+              <div className="gradient-text">Hardware</div>
             </h1>
-
-            <form
-              className="hero-form"
-              onSubmit={(event) => {
-                event.preventDefault();
-              }}
-            >
-              <label htmlFor="email" className="sr-only">
-                Work email
-              </label>
+            <div className="new-hero-form">
               <input
-                id="email"
-                name="email"
                 type="email"
                 placeholder="email@company.com"
-                autoComplete="email"
+                className="new-hero-input"
               />
-              <button type="submit" className="btn primary">
+              <button className="new-hero-button">
                 Join Waitlist
               </button>
-            </form>
-          </section>
-
-          <aside className="hero-visual" aria-hidden="true">
-            <div className="glow" />
-            <img src={robotImg} alt="ChipChat AI assistant robot" loading="lazy" />
-          </aside>
-        </main>
-      </section>
-
-      {/* ---------------- DEMO SECTION ---------------- */}
+            </div>
+          </div>
+          <div className="new-hero-right">
+            <img 
+              src={robotImg} 
+              alt="ChipChat AI assistant robot" 
+              className="new-hero-image"
+            />
+          </div>
+        </div>
+      </section>      {/* ---------------- DEMO SECTION ---------------- */}
       <section id="demo" className="demo-section" aria-labelledby="demo-heading">
         <div className="demo-copy">
           <span className="badge subtle">Live Demo</span>

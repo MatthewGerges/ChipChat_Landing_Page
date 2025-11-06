@@ -42,3 +42,59 @@ a {
 button {
   font: inherit;
 }
+
+/* Adjustments for .hero grid */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Ensure .hero-visual img is larger but proportional */
+.hero-visual img {
+  max-width: 720px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Left-align .hero-copy and stack text/form vertically */
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+/* Style placeholder in input */
+.hero-form input::placeholder {
+  color: var(--text-secondary);
+  content: "email@company.com";
+  /* content property doesn't work in placeholder, so use placeholder attribute in HTML */
+}
+
+/* Ensure button remains inside rounded container */
+.hero-form {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 999px;
+  background-color: var(--surface);
+}
+
+/* Adjust .about-header and .about-section to remove blank rectangle/new line spacing */
+.about-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-wrap: nowrap;
+}
+
+.about-header > p {
+  max-width: none;
+}
+
+.about-section {
+  gap: 2rem;
+}
