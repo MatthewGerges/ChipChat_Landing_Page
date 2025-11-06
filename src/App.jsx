@@ -160,7 +160,7 @@ export default function App() {
       <section id="contact" className="contact-section" aria-labelledby="contact-heading">
         <header className="contact-header">
           <span className="badge subtle">Contact</span>
-          <h2 id="contact-heading">Tell us what you want to build</h2>
+          <h2 id="contact-heading">Tell us how you want to collaborate</h2>
           <p>
             Have a question, want to collaborate, or exploring an investment? Drop a note and the
             ChipChat team will reach out shortly.

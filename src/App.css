@@ -58,13 +58,13 @@
 
 .brand-icon {
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: rgba(138, 76, 255, 0.12);
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid rgba(122, 60, 255, 0.3);
 }
 
@@ -309,7 +309,7 @@ h1 br {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding: 2rem 4rem;
+  padding: 1rem 4rem;
   background: linear-gradient(160deg, rgba(20, 8, 48, 0.98) 0%, rgba(14, 4, 40, 0.95) 60%, rgba(22, 6, 55, 0.94) 100%);
 }
 
