@@ -437,7 +437,7 @@ h1 br {
 .new-hero-content {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 4rem;
   max-width: 1400px;
   width: 100%;
@@ -454,6 +454,7 @@ h1 br {
   gap: 3rem;
   text-align: left;
   min-width: 0;
+  justify-content: center;
 }
 
 .new-hero-right {
@@ -463,6 +464,7 @@ h1 br {
   align-items: center;
   width: 100%;
   min-width: 0;
+  align-self: center;
 }
 
 .new-hero-form-wrapper {

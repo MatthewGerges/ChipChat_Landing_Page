@@ -23,8 +23,8 @@ const teamMembers = [
     bio: "Apple alum focused on system-level bring-up, power integrity, and automation. After seeing how slow and error-prone schematic design still is, Matthew started ChipChat to modernize the hardware workflow with AI.",
     image: matthewPfp,
     companies: [
-      { name: 'Apple', logo: appleLogo },
       { name: 'LevelHome', logo: levelHomeLogo },
+      { name: 'Apple', logo: appleLogo },
       { name: 'University of Waterloo', logo: waterlooLogo },
     ],
   },
