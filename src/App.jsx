@@ -4,11 +4,10 @@ import emailjs from '@emailjs/browser';
 import robotImg from '../assets/ChipChat Landing Page 2 Transparent.png';
 import appleLogo from '../assets/apple_logo_white_transparent.png';
 import levelHomeLogo from '../assets/level_home_logo.png';
-import nvidiaLogo from '../assets/nvidia_logo_green_transparent.png';
 import teslaLogo from '../assets/tesla_logo_red_transparent.png';
 import waterlooLogo from '../assets/waterloo_logo_transparent.png';
 import matthewPfp from '../assets/Matthew_G_Pfp.png';
-import andrewPfp from '../assets/Andrew_M_Pfp.jpeg';
+import danielPfp from '../assets/Daniel_B_Pfp.jpeg';
 import michaelPfp from '../assets/Michael_B_Pfp.jpeg';
 
 const navLinks = [
@@ -21,7 +20,7 @@ const teamMembers = [
   {
     name: 'Matthew Gerges',
     title: 'Founder & Systems Engineer',
-    bio: "Apple alum focused on system-level bring-up and debugging. After feeling how slow legacy hardware dev tools have become, Matthew started ChipChat to modernize the workflow.",
+    bio: "Apple alum focused on system-level bring-up, power integrity, and automation. After seeing how slow and error-prone schematic design still is, Matthew started ChipChat to modernize the hardware workflow with AI.",
     image: matthewPfp,
     companies: [
       { name: 'Apple', logo: appleLogo },
@@ -30,24 +29,24 @@ const teamMembers = [
     ],
   },
   {
-    name: 'Andrew Morris',
-    title: 'Product & UX',
-    bio: 'Former IDE designer who has spent the last 6 years building developer tools. He believes AI copilots can take the mind-numbing setup work off of hardware teams.',
-    image: andrewPfp,
+    name: 'Michael Botros',
+    title: 'Hardware & System Integration Lead',
+    bio: "Worked on Tesla's Autopilot and Apple's iPhone hardware teams. Michael brings deep experience in circuit validation, hardware bring-up, and system integration to make AI-assisted design reliable at scale.",
+    image: michaelPfp,
     companies: [
-      { name: 'NVIDIA', logo: nvidiaLogo },
       { name: 'Tesla', logo: teslaLogo },
+      { name: 'Apple', logo: appleLogo },
       { name: 'University of Waterloo', logo: waterlooLogo },
     ],
   },
   {
-    name: 'Michael Browne',
-    title: 'Hardware Automation',
-    bio: 'Built test automation rigs for semiconductor labs across three continents. Michael joined ChipChat to make reliable validation pipelines accessible to every team.',
-    image: michaelPfp,
+    name: 'Daniel Bishara',
+    title: 'Electrical & Systems Automation Lead',
+    bio: "Daniel worked on Tesla's Optimus humanoid robot and now on Apple's iPhone hardware team. With experience across robotics and electrical design, he helps strengthen ChipChat's AI reasoning and hardware automation systems.",
+    image: danielPfp,
     companies: [
-      { name: 'Apple', logo: appleLogo },
       { name: 'Tesla', logo: teslaLogo },
+      { name: 'Apple', logo: appleLogo },
       { name: 'University of Waterloo', logo: waterlooLogo },
     ],
   },
@@ -244,7 +243,7 @@ export default function App() {
           <span className="badge subtle">Live Demo</span>
           <h2 id="demo-heading">See ChipChat in action</h2>
           <p className="demo-lede">
-            Watch a quick walkthrough of how ChipChat accelerates bring-up workflows with an AI-native toolkit for hardware engineers.
+            Watch how ChipChat turns text prompts into complete, rule-compliant schematics — transforming how engineers design and validate hardware.
           </p>
         </div>
         <div className="video-frame">
@@ -264,8 +263,7 @@ export default function App() {
           <span className="badge subtle">Meet the Team</span>
           <h2 id="about-heading">The People Building ChipChat</h2>
           <p>
-            ChipChat is crafted by engineers who have wrestled with the same hardware workflows we now
-            automate. We built it for teams that want momentum from day zero.
+            ChipChat was built by engineers who've lived the pain of slow hardware workflows at Apple, Tesla, and startups alike. We're building the AI copilot we always wished existed — one that brings momentum to every hardware team from day zero.
           </p>
         </header>
 
@@ -298,10 +296,9 @@ export default function App() {
       <section id="contact" className="contact-section" aria-labelledby="contact-heading">
         <header className="contact-header">
           <span className="badge subtle">Contact</span>
-          <h2 id="contact-heading">Tell us how you want to collaborate</h2>
+          <h2 id="contact-heading">Tell us what you want to build</h2>
           <p>
-            Have a question, want to collaborate, or exploring an investment? Drop a note and the
-            ChipChat team will reach out shortly.
+            Whether you're an engineer, team lead, or investor, we'd love to hear from you. Share your idea and we'll show you how ChipChat can bring it to life — faster.
           </p>
         </header>
 

@@ -433,53 +433,17 @@ h1 br {
   color: white;
 }
 
+/* Desktop layout: Title + Form on left, Image on right */
 .new-hero-content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 4rem;
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
   flex: 1;
-}
-
-@media (max-width: 1024px) {
-  .new-hero-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    padding: 1.5rem 0;
-    align-items: center;
-  }
-  
-  /* On tablet and mobile: title (order 1), image (order 2), form (order 3) */
-  .new-hero-left {
-    display: contents;
-  }
-  
-  .new-hero-title {
-    order: 1;
-    text-align: center;
-    width: 100%;
-  }
-  
-  .new-hero-right {
-    order: 2;
-  }
-  
-  .new-hero-form-wrapper {
-    order: 3;
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .new-hero-content {
-    gap: 2rem;
-    padding: 1rem 0;
-  }
 }
 
 .new-hero-left {
@@ -489,20 +453,7 @@ h1 br {
   align-items: flex-start;
   gap: 3rem;
   text-align: left;
-}
-
-.new-hero-form-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-@media (max-width: 1024px) {
-  .new-hero-form-wrapper {
-    width: 100%;
-    justify-content: center;
-  }
+  min-width: 0;
 }
 
 .new-hero-right {
@@ -510,16 +461,72 @@ h1 br {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  min-width: 0;
 }
 
-@media (max-width: 1024px) {
+.new-hero-form-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 500px;
+}
+
+/* Medium and smaller screens: Stack Title, Image, Form */
+@media (max-width: 1200px) {
+  .new-hero-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  
+  /* Use display: contents to make title and form separate grid items */
+  .new-hero-left {
+    display: contents;
+  }
+  
+  .new-hero-title {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 0;
+    justify-self: center;
+  }
+  
+  .new-hero-form-wrapper {
+    justify-content: center;
+    max-width: 100%;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
   .new-hero-right {
     width: 100%;
     max-width: 600px;
+    margin: 0 auto;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
+/* Tablet and smaller */
+@media (max-width: 1024px) {
+  .new-hero-content {
+    gap: 3rem;
+    padding: 1.5rem 0;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
+  .new-hero-content {
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+  
   .new-hero-right {
     max-width: 100%;
     padding: 0 1rem;
@@ -558,7 +565,6 @@ h1 br {
 .new-hero-form {
   display: flex;
   gap: 1rem;
-  margin-top: 2rem;
   width: 100%;
   max-width: 500px;
   flex-wrap: wrap;
@@ -575,7 +581,6 @@ h1 br {
   .new-hero-form {
     flex-direction: column;
     gap: 0.75rem;
-    margin-top: 1rem;
   }
 }
 
@@ -672,6 +677,14 @@ h1 br {
   height: auto;
   filter: drop-shadow(0 45px 70px rgba(32, 0, 95, 0.7));
   object-fit: contain;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .new-hero-image {
+    max-width: 600px;
+    width: 100%;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -685,7 +698,6 @@ h1 br {
   .new-hero-image {
     max-width: 100%;
     width: 100%;
-    padding: 0 1rem;
   }
 }
 
@@ -1141,3 +1153,4 @@ h1 br {
     justify-content: center;
   }
 }
+
