@@ -198,9 +198,8 @@ export default function App() {
         <div className="new-hero-content">
           <div className="new-hero-left">
             <h1 className="new-hero-title">
-              <div className="gradient-text">Vibe Code</div>
-              <div className="white-text">but with</div>
-              <div className="gradient-text">Hardware</div>
+              <div className="gradient-text">Faster Schematics</div>
+              <div className="gradient-text">Fewer Mistakes</div>
             </h1>
             <div className="new-hero-form-wrapper">
               {waitlistSuccess ? (
