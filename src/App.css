@@ -409,6 +409,7 @@ h1 br {
   text-transform: uppercase;
   background: linear-gradient(115deg, #f0bfff 0%, #ff7cf0 45%, #6ee7ff 100%);
   -webkit-background-clip: text;
+  -moz-background-clip: text;
   background-clip: text;
   color: transparent;
 }
@@ -446,10 +447,31 @@ h1 br {
 
 @media (max-width: 1024px) {
   .new-hero-content {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 3rem;
     padding: 1.5rem 0;
     align-items: center;
+  }
+  
+  /* On tablet and mobile: title (order 1), image (order 2), form (order 3) */
+  .new-hero-left {
+    display: contents;
+  }
+  
+  .new-hero-title {
+    order: 1;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .new-hero-right {
+    order: 2;
+  }
+  
+  .new-hero-form-wrapper {
+    order: 3;
+    width: 100%;
   }
 }
 
@@ -469,18 +491,17 @@ h1 br {
   text-align: left;
 }
 
-@media (max-width: 1024px) {
-  .new-hero-left {
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    gap: 2rem;
-  }
+.new-hero-form-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-@media (max-width: 768px) {
-  .new-hero-left {
-    gap: 1.5rem;
+@media (max-width: 1024px) {
+  .new-hero-form-wrapper {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -604,6 +625,45 @@ h1 br {
 .new-hero-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(122, 60, 255, 0.3);
+}
+
+.new-hero-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.success-message {
+  background: rgba(76, 175, 80, 0.15);
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  color: #81c784;
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  width: 100%;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .new-hero-image {
@@ -854,6 +914,25 @@ h1 br {
   font-size: 0.95rem;
   font-family: inherit;
   transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.contact-row input.error,
+.contact-row textarea.error {
+  border-color: rgba(244, 67, 54, 0.6);
+  background: rgba(244, 67, 54, 0.05);
+}
+
+.field-error {
+  color: #f44336;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.contact-section .success-message {
+  margin-top: 1rem;
+  max-width: 100%;
 }
 
 .contact-row textarea {

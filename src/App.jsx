@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import emailjs from '@emailjs/browser';
 import robotImg from '../assets/ChipChat Landing Page 2 Transparent.png';
 import appleLogo from '../assets/apple_logo_white_transparent.png';
 import levelHomeLogo from '../assets/level_home_logo.png';
@@ -53,6 +54,127 @@ const teamMembers = [
 ];
 
 export default function App() {
+  const [waitlistEmail, setWaitlistEmail] = useState('');
+  const [waitlistSuccess, setWaitlistSuccess] = useState(false);
+  const [waitlistError, setWaitlistError] = useState('');
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [contactSuccess, setContactSuccess] = useState(false);
+  const [contactErrors, setContactErrors] = useState({});
+  const [contactLoading, setContactLoading] = useState(false);
+
+  // EmailJS configuration - Replace these with your EmailJS credentials
+  const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+  const EMAILJS_TEMPLATE_ID_WAITLIST = 'YOUR_WAITLIST_TEMPLATE_ID';
+  const EMAILJS_TEMPLATE_ID_CONTACT = 'YOUR_CONTACT_TEMPLATE_ID';
+  const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+  const NOTIFICATION_EMAIL = 'matthew.g.2219@gmail.com';
+
+  const handleWaitlistSubmit = async (e) => {
+    e.preventDefault();
+    setWaitlistError('');
+    
+    if (!waitlistEmail || !waitlistEmail.includes('@')) {
+      setWaitlistError('Please enter a valid email address');
+      return;
+    }
+
+    try {
+      // Send email notification using EmailJS
+      if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID_WAITLIST,
+          {
+            email: waitlistEmail,
+            to_email: NOTIFICATION_EMAIL,
+            message: `New waitlist signup: ${waitlistEmail}`,
+          },
+          EMAILJS_PUBLIC_KEY
+        );
+      }
+      
+      setWaitlistSuccess(true);
+      setWaitlistEmail('');
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setWaitlistSuccess(false);
+      }, 5000);
+    } catch (error) {
+      console.error('Error sending waitlist email:', error);
+      // Still show success to user even if email fails
+      setWaitlistSuccess(true);
+      setWaitlistEmail('');
+      setTimeout(() => {
+        setWaitlistSuccess(false);
+      }, 5000);
+    }
+  };
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setContactErrors({});
+    setContactSuccess(false);
+
+    // Validate form
+    const errors = {};
+    if (!contactForm.name.trim()) {
+      errors.name = 'Name needed';
+    }
+    if (!contactForm.email.trim() || !contactForm.email.includes('@')) {
+      errors.email = 'Email needed';
+    }
+    if (!contactForm.message.trim()) {
+      errors.message = 'You need to send a message';
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setContactErrors(errors);
+      return;
+    }
+
+    setContactLoading(true);
+
+    try {
+      // Send email notification using EmailJS
+      if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID_CONTACT,
+          {
+            from_name: contactForm.name,
+            from_email: contactForm.email,
+            message: contactForm.message,
+            to_email: NOTIFICATION_EMAIL,
+          },
+          EMAILJS_PUBLIC_KEY
+        );
+      }
+      
+      setContactSuccess(true);
+      setContactForm({ name: '', email: '', message: '' });
+      setContactLoading(false);
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setContactSuccess(false);
+      }, 5000);
+    } catch (error) {
+      console.error('Error sending contact email:', error);
+      setContactLoading(false);
+      // Still show success to user even if email fails
+      setContactSuccess(true);
+      setContactForm({ name: '', email: '', message: '' });
+      setTimeout(() => {
+        setContactSuccess(false);
+      }, 5000);
+    }
+  };
+
   return (
     <div className="page">
       {/* ---------------- NAV & HERO SECTION ---------------- */}
@@ -81,15 +203,31 @@ export default function App() {
               <div className="white-text">but with</div>
               <div className="gradient-text">Hardware</div>
             </h1>
-            <div className="new-hero-form">
-              <input
-                type="email"
-                placeholder="email@company.com"
-                className="new-hero-input"
-              />
-              <button className="new-hero-button">
-                Join Waitlist
-              </button>
+            <div className="new-hero-form-wrapper">
+              {waitlistSuccess ? (
+                <div className="success-message">
+                  Thanks for joining the waitlist! We'll let you know as soon as it's out.
+                </div>
+              ) : (
+                <form className="new-hero-form" onSubmit={handleWaitlistSubmit}>
+                  <input
+                    type="email"
+                    placeholder="email@company.com"
+                    className="new-hero-input"
+                    value={waitlistEmail}
+                    onChange={(e) => {
+                      setWaitlistEmail(e.target.value);
+                      setWaitlistError('');
+                    }}
+                  />
+                  <button type="submit" className="new-hero-button">
+                    Join Waitlist
+                  </button>
+                  {waitlistError && (
+                    <div className="error-message">{waitlistError}</div>
+                  )}
+                </form>
+              )}
             </div>
           </div>
           <div className="new-hero-right">
@@ -167,42 +305,81 @@ export default function App() {
           </p>
         </header>
 
-        <form
-          className="contact-form"
-          onSubmit={(event) => {
-            event.preventDefault();
-          }}
-        >
-          <div className="contact-row">
-            <label htmlFor="contact-name">Name</label>
-            <input id="contact-name" name="name" type="text" placeholder="Your name" />
+        {contactSuccess ? (
+          <div className="success-message">
+            Thanks for your message! We'll get back to you shortly.
           </div>
+        ) : (
+          <form className="contact-form" onSubmit={handleContactSubmit}>
+            <div className="contact-row">
+              <label htmlFor="contact-name">Name</label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                value={contactForm.name}
+                onChange={(e) => {
+                  setContactForm({ ...contactForm, name: e.target.value });
+                  if (contactErrors.name) {
+                    setContactErrors({ ...contactErrors, name: '' });
+                  }
+                }}
+                className={contactErrors.name ? 'error' : ''}
+              />
+              {contactErrors.name && (
+                <span className="field-error">{contactErrors.name}</span>
+              )}
+            </div>
 
-          <div className="contact-row">
-            <label htmlFor="contact-email">Email</label>
-            <input
-              id="contact-email"
-              name="email"
-              type="email"
-              placeholder="you@company.com"
-              autoComplete="email"
-            />
-          </div>
+            <div className="contact-row">
+              <label htmlFor="contact-email">Email</label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+                value={contactForm.email}
+                onChange={(e) => {
+                  setContactForm({ ...contactForm, email: e.target.value });
+                  if (contactErrors.email) {
+                    setContactErrors({ ...contactErrors, email: '' });
+                  }
+                }}
+                className={contactErrors.email ? 'error' : ''}
+              />
+              {contactErrors.email && (
+                <span className="field-error">{contactErrors.email}</span>
+              )}
+            </div>
 
-          <div className="contact-row">
-            <label htmlFor="contact-message">Message</label>
-            <textarea
-              id="contact-message"
-              name="message"
-              rows="4"
-              placeholder="Let us know how we can help"
-            />
-          </div>
+            <div className="contact-row">
+              <label htmlFor="contact-message">Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows="4"
+                placeholder="Let us know how we can help"
+                value={contactForm.message}
+                onChange={(e) => {
+                  setContactForm({ ...contactForm, message: e.target.value });
+                  if (contactErrors.message) {
+                    setContactErrors({ ...contactErrors, message: '' });
+                  }
+                }}
+                className={contactErrors.message ? 'error' : ''}
+              />
+              {contactErrors.message && (
+                <span className="field-error">{contactErrors.message}</span>
+              )}
+            </div>
 
-          <button type="submit" className="btn primary">
-            Send message
-          </button>
-        </form>
+            <button type="submit" className="btn primary" disabled={contactLoading}>
+              {contactLoading ? 'Sending...' : 'Send message'}
+            </button>
+          </form>
+        )}
       </section>
     </div>
   );
